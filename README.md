@@ -61,6 +61,6 @@ acl.allow?(:name, :update, [:operator], :first => 1, :second => 1)
 acl.allow?(:name, :update, [:operator], :first => 3, :second => 3)
 ```
 
-acl#allow? will be return true/false
-acl#check will be return instance of object Acl::Result
-acl#check! will be raised if false
+* acl#allow? will be return true/false
+* acl#check will be return instance of object Acl::Result
+* acl#check! will be raised if false
