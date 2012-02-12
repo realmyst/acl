@@ -5,6 +5,7 @@ class TestAcl < MiniTest::Unit::TestCase
     assert_equal [:user, :moderator, :editor, :admin].sort, ACL.role_list.sort
     assert ACL.allow?(:post, :edit, :user)
     assert ACL.allow?(:post, :edit, :moderator)
+    assert ACL.allow?(:post, :index, :editor)
     assert !ACL.allow?(:post, :edit, :editor)
 
     assert ACL.allow?(:article, :edit, :user)

@@ -13,6 +13,10 @@ module Acl
       @roles
     end
 
+    def role(role)
+      true
+    end
+
     def add_resource(resource)
       @resources[resource.name] = resource
     end
@@ -22,14 +26,14 @@ module Acl
       return !result.error?
     end
 
-    def check(resource, privilege, roles)
-      raise ::Acl::ResourceNotFound unless @resources[resource]
-      @resources[resource].allow?(privilege, roles)
+    def check(resource, privilege, roles, options = nil)
+      raise ResourceNotFound unless @resources[resource]
+      @resources[resource].allow?(privilege, roles, options)
     end
 
     def check!(*args)
       result = check(*args)
-      raise ::Acl::AccessDenied, result.message if result.error?
+      raise AccessDenied, result.message if result.error?
       return true
     end
 
@@ -42,5 +46,7 @@ module Acl
   class RoleNotFound < RuntimeError
   end
   class AccessDenied < RuntimeError
+  end
+  class UnknownRole < ArgumentError
   end
 end
